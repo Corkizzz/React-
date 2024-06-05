@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用js创建虚拟DOM</title>
+</head>
+<body>
+<!--准备好一个“容器”-->
+<div id="test"></div>
+<!--引入React核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入react-dom,用于支持react操作DOM-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转换为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel"> /* 此处要写 babel 表示脚本中写的是 jsx 用babel转换为 js */
+// 1.创建虚拟 DOM const VDOM = React.createElement(标签名,标签属性，标签内容 )
+const VDOM = React.createElement('h1',{id:'qq',class:'box'},'Hello React' )
+// 2.渲染虚拟 DOM 到页面   ReactDOM.render(虚拟DOM，容器)
+ReactDOM.render(VDOM,document.getElementById('test'))
+
+</script>
+</body>
+</html>
+<style>
+    .box{
+        color: red;
+    }
+</style>
