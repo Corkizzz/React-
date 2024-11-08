@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    // 定义一个Person类
+    class Person{
+        // 构造器方法 用于初始化实例属性 通过new关键字调用 会自动执行 (也就是给类的属性赋值)
+         constructor(name,age) {
+                this.name = name
+                this.age = age
+         }
+         // 类中的方法，方法中的this指向Person类的实例对象  方法可供实例对象调用
+         speak(){
+             // speak 方法放在了哪里？ ---- Person类的原型对象上，供实例对象调用
+             // 通过实例对象调用方法，方法中的this指向实例对象(Person类的实例)
+             console.log("", this)
+         }
+    }
+    const p1 = new Person('张三', 18)
+    p1.speak()  //通过实例对象调用方法
+
+    const x = p1.speak
+    x() //通过变量调用方法 方法中的this指向undefined 类中的方法默认开启了严格模式 严格模式下this指向undefined
+    // 如果通过实例对象调用方法，可以去new这个实例对象的类上去找这个方法，如果找不到，会去原型对象上去找这个方法
+    // 如果通过变量调用方法，方法中的this指向undefined
+</script>

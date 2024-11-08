@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>state</title>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+</body>
+</html>
+
+<script type="text/babel">
+    // 1.创建组件 （类式组件，目前没学hook,函数组件无法使用 state）
+    class Weather extends React.Component{
+        // 构造器 （因为要修改组件实例对象上的东西，state的值默认是null,要修改需要使用构造器）
+        constructor(props) {
+            super(props);  // 继承父类的构造器 （固定写法）super必须调用
+            // 初始化状态
+            this.state = {  // state是组件对象的私有属性，只能在当前组件中使用
+                isHot:false
+            }
+        }
+        changeWeather(){
+            // changeWeather写在这里后，方法放在了哪里？----放在了Weather类的原型对象上，供实例使用
+            // 通过Weather实例调用 changeWeather 时，changeWeather 中的 this 就是 Weather 实例。
+            // 但是这里的this指向undefined，因为是普通函数，不是对象的方法 所以需要在render中绑定this
+            // 但是 这个方法仍然不是通过实例调用的，所以this指向undefined
+            //  new 出来该类的实例，并通过该实例调用到原型上的 render 方法 所以render中的this指向当前组件实例对象
+            // 可看复习文件中类中的方法的this指向 --下节改掉这个问题
+            console.log('1',this.state)
+        }
+        render(){
+            // render 中的this指向当前组件实例对象
+            // 读取状态
+            const {isHot} = this.state
+            // onClick={this.changeWeather} 这里写出来 没调用changeWeather,只是通过类的实例对象沿着原型链查找找的了这个方法，然后直接把这个函数交给了onClick作为回调了
+            // 等去点击这个 h1 的时候，直接从堆里面把那个函数拉出来直接执行，不算是通过实例对象调用的，所以this指向undefined
+            return <h5 id="title" onClick={this.changeWeather}>点击改变状态---{ isHot ? '热':'冷'}状态</h5>
+        }
+    }
+
+    // 2. 渲染组件
+    ReactDOM.render(<Weather/>,document.getElementById('test'))
+    const title = document.getElementById('title')
+
+
+/*    // 点击方式 1
+    title.addEventListener('click',function (){
+        console.log("标题被点击了")
+    })*/
+
+/*    // 点击方式2
+    title.onclick = function (){
+        console.log("标题被点击了",this)
+    }*/
+
+/*    // 点击方式3
+    function changeWeather(){
+        // this指向undefined 因为是普通函数，不是对象的方法
+        console.log("标题被点击了",this)
+    }*/
+</script>
