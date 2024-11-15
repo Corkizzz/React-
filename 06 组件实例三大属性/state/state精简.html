@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>state</title>
+    <script type="text/javascript" src="../../js/react.development.js"></script>
+    <script type="text/javascript" src="../../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+</body>
+</html>
+
+<script type="text/babel">
+    // 1. 创建组件
+    class Weather extends React.Component{
+        // 简写 不用写构造器了
+        // 初始化状态 (在类中直接赋值等同于给类中属性赋值，如若没有这个属性，则直接新增，具体可看复习中相关代码)
+        state = {isHot:false}
+        render(){
+            const { isHot } = this.state
+            return <h5 onClick= {this.changeWeather}>点击改变状态-{ isHot?'冷':'热' }--状态</h5>
+        }
+        changeWeather=()=>{
+            console.log(this);
+            this.setState({
+                isHot:!this.state.isHot
+            })
+        }  
+    }
+
+    // 2. 渲染组件
+    ReactDOM.render(<Weather/>,document.getElementById('test'))
+    
+
+</script>
