@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>state</title>
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+</head>
+<body>
+<div id="test"></div>
+</body>
+</html>
+
+<script type="text/babel">
+    class Weather extends React.Component{
+        constructor(props) {
+            super(props);
+            // 初始化状态
+            this.state = {
+                isHot:false
+            }
+        }
+        changeWeather=()=>{
+            const {isHot} = this.state
+            this.setState({isHot:!isHot})
+        }
+        render(){
+            const {isHot} = this.state
+            return <h5 id="title" onClick={this.changeWeather}>点击改变状态---{ isHot ? '热':'冷'}状态</h5>
+        }
+    }
+
+    // 2. 渲染组件
+    ReactDOM.render(<Weather/>,document.getElementById('test'))
+    const title = document.getElementById('title')
+
+</script>
