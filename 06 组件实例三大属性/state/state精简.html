@@ -25,6 +25,7 @@
             const { isHot } = this.state
             return <h5 onClick= {this.changeWeather}>点击改变状态-{ isHot?'冷':'热' }--状态</h5>
         }
+        // 赋值语句加箭头函数
         changeWeather=()=>{
             console.log(this);
             this.setState({
