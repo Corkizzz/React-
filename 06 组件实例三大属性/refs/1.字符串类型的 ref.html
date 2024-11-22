@@ -35,6 +35,7 @@
 
         // 点击按钮提示输入内容
         handleClick = () => {
+            //this.refs.input  真实DOM节点 通过这个节点可以获取到用户输入的内容
             console.log("点击提示输入内容", this.refs.input.value)
             alert('输入的内容是:' + this.refs.input.value)
             this.refs.input.value = ''
